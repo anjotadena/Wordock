@@ -17,7 +17,8 @@ fi
 # Create necessary directories
 echo "Setting up directories..."
 mkdir -p src
-mkdir -p config
+mkdir -p config/php
+mkdir -p config/nginx
 
 # Download WordPress if not already in src/
 if [ ! -f "src/index.php" ]; then
@@ -35,7 +36,7 @@ if [ ! -f ".env" ]; then
   echo "Creating default .env file..."
   cat <<EOT > .env
 # WordPress Configuration
-WP_PORT=8000
+WP_PORT=8082
 WP_DB_NAME=wordock_db
 WP_DB_USER=wordock_user
 WP_DB_PASSWORD=password
@@ -53,9 +54,9 @@ echo "Loading environment variables from .env..."
 export $(grep -v '^#' .env | xargs)
 
 # Generate default Nginx config if not present
-if [ ! -f "config/nginx.conf" ]; then
+if [ ! -f "config/nginx/nginx.conf" ]; then
   echo "Creating default Nginx configuration..."
-  cat <<EOT > config/nginx.conf
+  cat <<EOT > config/nginx/nginx.conf
 server {
     listen 80;
     server_name localhost;
@@ -85,9 +86,9 @@ else
 fi
 
 # Generate default PHP configuration if not present
-if [ ! -f "config/php.ini" ]; then
+if [ ! -f "config/php/php.ini" ]; then
   echo "Creating default PHP configuration..."
-  cat <<EOT > config/php.ini
+  cat <<EOT > config/php/php.ini
 memory_limit = 512M
 upload_max_filesize = 64M
 post_max_size = 64M
@@ -97,6 +98,49 @@ EOT
 else
   echo "PHP configuration already exists."
 fi
+
+# Generate wp-config.php if not already present
+if [ ! -f "src/wp-config.php" ]; then
+  echo "Generating wp-config.php..."
+  cat <<EOT > src/wp-config.php
+<?php
+// ** Database settings - Pulled from .env ** //
+define('DB_NAME', '${WP_DB_NAME}');
+define('DB_USER', '${WP_DB_USER}');
+define('DB_PASSWORD', '${WP_DB_PASSWORD}');
+define('DB_HOST', 'db'); // Use the service name "db" as defined in docker-compose.yml
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+
+// ** Authentication unique keys and salts ** //
+define('AUTH_KEY', '$(openssl rand -base64 32)');
+define('SECURE_AUTH_KEY', '$(openssl rand -base64 32)');
+define('LOGGED_IN_KEY', '$(openssl rand -base64 32)');
+define('NONCE_KEY', '$(openssl rand -base64 32)');
+define('AUTH_SALT', '$(openssl rand -base64 32)');
+define('SECURE_AUTH_SALT', '$(openssl rand -base64 32)');
+define('LOGGED_IN_SALT', '$(openssl rand -base64 32)');
+define('NONCE_SALT', '$(openssl rand -base64 32)');
+
+// ** Table prefix ** //
+\$table_prefix = 'wp_';
+
+// ** Debugging mode ** //
+define('WP_DEBUG', false);
+
+// ** WordPress absolute path ** //
+if (!defined('ABSPATH')) {
+    define('ABSPATH', __DIR__ . '/');
+}
+
+// ** Sets up WordPress vars and included files ** //
+require_once ABSPATH . 'wp-settings.php';
+EOT
+  echo "wp-config.php generated successfully!"
+else
+  echo "wp-config.php already exists. Skipping generation."
+fi
+
 
 # Start the Docker Compose environment
 echo "Starting Docker containers..."
