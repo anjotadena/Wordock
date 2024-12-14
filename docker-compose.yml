@@ -36,6 +36,20 @@ services:
     networks:
       - wordock-network
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wordock-phpmyadmin
+    environment:
+      PMA_HOST: db                 # Link to the MySQL service (use service name as the host)
+      PMA_PORT: 3306               # MySQL port
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}  # Root password from .env
+    ports:
+      - "9080:80"                  # Access phpMyAdmin on localhost:8080
+    depends_on:
+      - db                         # Ensure MySQL starts before phpMyAdmin
+    networks:
+      - wordock-network
+
   mailhog:
     image: mailhog/mailhog
     container_name: wordock-mailhog

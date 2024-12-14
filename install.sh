@@ -149,4 +149,5 @@ docker-compose up -d
 # Output success message with dynamic port
 echo "Wordock has been successfully installed!"
 echo "Visit your WordPress site at: http://localhost:${WP_PORT}"
+echo "PHPMyAdmin is available at: http://localhost:9080"
 echo "MailHog is available at: http://localhost:8025"
