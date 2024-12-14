@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: wordock-nginx
+    ports:
+      - "${WP_PORT}:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - wordock-network
+
+  php:
+    image: php:8.2-fpm
+    container_name: wordock-php
+    volumes:
+      - ./src:/var/www/html
+      - ./config/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    networks:
+      - wordock-network
+
+  db:
+    image: mysql:5.7
+    container_name: wordock-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${WP_DB_NAME}
+      MYSQL_USER: ${WP_DB_USER}
+      MYSQL_PASSWORD: ${WP_DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - wordock-network
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: wordock-mailhog
+    ports:
+      - "1025:1025" # SMTP server
+      - "8025:8025" # Web UI for email testing
+    networks:
+      - wordock-network
+
+volumes:
+  db-data:
+
+networks:
+  wordock-network:

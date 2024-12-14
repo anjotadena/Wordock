@@ -1,0 +1,5 @@
+src/wp-config.php
+*.log
+*.sql
+node_modules
+.git
