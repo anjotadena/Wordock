@@ -1,8 +1,8 @@
+# **Wordock**
+
 <div align="center">
   <img src="wordock.png" alt="Wordock Logo" width="200">
 </div>
-
-# **Wordock**
 
 **Wordock** is a Dockerized WordPress environment designed for streamlined local development and deployment. It uses Nginx, PHP-FPM, MySQL, phpMyAdmin, and MailHog, with built-in support for HTTPS and versioning.
 
@@ -15,6 +15,7 @@ The project is structured as follows:
 ```
 wordock/
 ├── src/                         # WordPress core files (populated on first run)
+├── wordock.png                 # Project logo
 ├── config/                      # Configuration files for Nginx and PHP
 │   ├── nginx/
 │   │   ├── nginx.conf           # Nginx server configuration
@@ -26,6 +27,8 @@ wordock/
 │   ├── php/
 │   │   ├── php.ini              # PHP configuration for WordPress
 │   │   └── Dockerfile           # Custom Dockerfile for PHP
+├── .github/                     # GitHub-specific files (e.g., PR templates)
+│   └── PULL_REQUEST_TEMPLATE.md # Pull request template
 ├── docker-compose.yml           # Docker Compose configuration
 ├── .env                         # Environment variables for configuration
 ├── .gitignore                   # Files and folders to ignore in Git
@@ -35,36 +38,8 @@ wordock/
 
 ---
 
-## **Project Ownership**
-This project has been detached from its original repository, and the `.git` directory has been removed to take full ownership of the source code. 
-
-If you wish to reinitialize Git for version control under your own repository, follow these steps:
-
-1. Initialize a new Git repository:
-   ```bash
-   git init
-   ```
-
-2. Add all project files to the new repository:
-   ```bash
-   git add .
-   ```
-
-3. Commit the current state of the codebase:
-   ```bash
-   git commit -m "Initial commit for Wordock"
-   ```
-
-4. Link to a new remote repository (e.g., GitHub, GitLab):
-   ```bash
-   git remote add origin https://github.com/yourusername/your-new-repo.git
-   ```
-
-5. Push the code to the new remote repository:
-   ```bash
-   git branch -M main
-   git push -u origin main
-   ```
+## **Beta Version Notice**
+This application is currently in **beta (1.0.0-beta)**. Some features may still be under development or subject to change. We welcome your feedback and contributions to improve Wordock.
 
 ---
 
@@ -145,6 +120,38 @@ docker-compose down --volumes
 docker-compose up -d
 ```
 
+---
+
+## **Contributing**
+
+We welcome contributions to Wordock!  
+If you want to report a bug, suggest a new feature, or improve the code, feel free to create a pull request (PR).  
+
+### **Steps to Contribute**
+1. **Fork the Repository**: Click the **Fork** button at the top right of this page to create your copy of the repo.
+2. **Clone Your Fork**:
+   ```bash
+   git clone https://github.com/yourusername/wordock.git
+   cd wordock
+   ```
+3. **Create a New Branch**: Use a descriptive branch name:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+4. **Make Changes**: Add your improvements or fixes.
+5. **Commit Your Changes**:
+   ```bash
+   git add .
+   git commit -m "Describe your changes"
+   ```
+6. **Push Your Branch**:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+7. **Create a Pull Request**:  
+   Go to the original repository and click **New Pull Request**. Follow the PR template guidelines.
+
+You can find the **Pull Request template** [here](.github/PULL_REQUEST_TEMPLATE.md).
 
 ---
 
