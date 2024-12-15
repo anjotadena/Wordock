@@ -1,3 +1,6 @@
+<div align="center">
+  <img src="wordock.png" alt="Wordock Logo" width="200">
+</div>
 # **Wordock**
 
 **Wordock** is a Dockerized WordPress environment designed for streamlined local development and deployment. It uses Nginx, PHP-FPM, MySQL, phpMyAdmin, and MailHog, with built-in support for HTTPS and versioning.
