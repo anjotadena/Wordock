@@ -126,7 +126,7 @@ define('NONCE_SALT', '$(openssl rand -base64 32)');
 \$table_prefix = 'wp_';
 
 // ** Debugging mode ** //
-define('WP_DEBUG', false);
+define('WP_DEBUG', true);
 
 // ** WordPress absolute path ** //
 if (!defined('ABSPATH')) {

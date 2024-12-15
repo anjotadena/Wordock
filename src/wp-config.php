@@ -8,20 +8,20 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
 // ** Authentication unique keys and salts ** //
-define('AUTH_KEY', '0/mW264TelIounoRVq2MVu31NHas0LsbgD71G4zXpjo=');
-define('SECURE_AUTH_KEY', 'BG9AX4ESojXlhXSaCVd7vgT8d0HZCfK6SM+B1OS2Ikg=');
-define('LOGGED_IN_KEY', 'GAmn2a2NadRRQgCwLai49LZwogaIIk5uVxWdRLuC4Pc=');
-define('NONCE_KEY', 'BSpLG56B3LEuIk37QM4IDVhZNB9RC+ew84iPyO6gmFA=');
-define('AUTH_SALT', 'iESuk/APovFOUIfNIMAD4W+JojZn7SJ2ex91mXrp0z8=');
-define('SECURE_AUTH_SALT', '63MCUPgUyyhMfHycsxWE54uQKDu/iD3Wca1nRFKWIIA=');
-define('LOGGED_IN_SALT', 'hFKj0Ri+dooo/T7CABQmSpxSxBZ4Lg+0D9Rpj5T2bdM=');
-define('NONCE_SALT', 'hM3mOLVPN04yWHJl30/KUmOJw0dYOn8Qx4BviD7O6y8=');
+define('AUTH_KEY', '4VfH5G7KcvdCV5b51SkJ9qdj+6gCt77Ngfg1IKiDPyk=');
+define('SECURE_AUTH_KEY', 'A7GV7MOFHv+L5H6iKVGVInIAdxx5thbpWsWML5bvfRA=');
+define('LOGGED_IN_KEY', 'rqlmeFHwQEfbu3Wu0idfcTPSQPYLo5TqGjVONGJ+SiQ=');
+define('NONCE_KEY', '3RXqv9ppTApI6/wYiOK2nhtw3de0JvtuddI6GHMLLTo=');
+define('AUTH_SALT', 'uFkI/yirCxSJFfbFyYAc6Jq4fezAqA4IhtYZMVasTWE=');
+define('SECURE_AUTH_SALT', 'LxbI3hG7+n8W54T6BBdzSlIqMKEkWArJVP/EFSQb4Vo=');
+define('LOGGED_IN_SALT', '7navZezUOyeh9VNCWlF9gJe2/VS7Be9PapibqppEVn0=');
+define('NONCE_SALT', 'JsT2wF+v9RVjzSwTXBkfqlmQdgMzW4t+WFGtGdABeqI=');
 
 // ** Table prefix ** //
 $table_prefix = 'wp_';
 
 // ** Debugging mode ** //
-define('WP_DEBUG', true);
+define('WP_DEBUG', false);
 
 // ** WordPress absolute path ** //
 if (!defined('ABSPATH')) {
