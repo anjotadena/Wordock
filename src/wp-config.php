@@ -7,6 +7,9 @@ define('DB_HOST', 'db'); // Use the service name "db" as defined in docker-compo
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
+// define('WP_HOME', 'https://localhost');
+// define('WP_SITEURL', 'https://localhost');
+
 // ** Authentication unique keys and salts ** //
 define('AUTH_KEY', '4VfH5G7KcvdCV5b51SkJ9qdj+6gCt77Ngfg1IKiDPyk=');
 define('SECURE_AUTH_KEY', 'A7GV7MOFHv+L5H6iKVGVInIAdxx5thbpWsWML5bvfRA=');
