@@ -20,6 +20,9 @@ mkdir -p src
 mkdir -p config/php
 mkdir -p config/nginx
 
+# Add .gitkeep
+touch src/.gitkeep
+
 # Download WordPress if not already in src/
 if [ ! -f "src/index.php" ]; then
   echo "Downloading WordPress..."
@@ -37,6 +40,7 @@ if [ ! -f ".env" ]; then
   cat <<EOT > .env
 # WordPress Configuration
 WP_PORT=8082
+WP_PORT_HTTPS=8083
 WP_DB_NAME=wordock_db
 WP_DB_USER=wordock_user
 WP_DB_PASSWORD=password
@@ -144,10 +148,11 @@ fi
 
 # Start the Docker Compose environment
 echo "Starting Docker containers..."
-docker-compose up -d
+docker-compose up
 
 # Output success message with dynamic port
 echo "Wordock has been successfully installed!"
 echo "Visit your WordPress site at: http://localhost:${WP_PORT}"
-echo "PHPMyAdmin is available at: http://localhost:9080"
-echo "MailHog is available at: http://localhost:8025"
+echo "Visit your WordPress site at: https://localhost:${WP_PORT_HTTPS}"
+echo "PHPMyAdmin is available at: https://localhost:9080"
+echo "MailHog is available at: https://localhost:8025"

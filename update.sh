@@ -14,4 +14,5 @@ docker-compose up -d
 
 echo "Wordock updated and running!"
 echo "WordPress: http://localhost:${WP_PORT}"
+echo "WordPress: https://localhost:${WP_PORT_HTTPS}"
 echo "MailHog: http://localhost:8025"
