@@ -34,6 +34,11 @@ else
   echo "WordPress files already exist in the src/ directory."
 fi
 
+mkdir -p src/wp-content/uploads
+mkdir -p src/wp-content/themes
+mkdir -p src/wp-content/plugins
+mkdir -p src/wp-content/upgrades
+
 # Generate .env file if not present
 if [ ! -f ".env" ]; then
   echo "Creating default .env file..."
@@ -131,6 +136,8 @@ define('NONCE_SALT', '$(openssl rand -base64 32)');
 
 // ** Debugging mode ** //
 define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', false);
 
 // ** WordPress absolute path ** //
 if (!defined('ABSPATH')) {
@@ -148,7 +155,11 @@ fi
 
 # Start the Docker Compose environment
 echo "Starting Docker containers..."
-docker-compose up
+docker-compose build --no-cache
+docker-compose up -d
+
+# Change ownership of the WordPress files
+docker-compose run --rm nginx chown -R www-data:www-data /var/www/html/wp-content
 
 # Output success message with dynamic port
 echo "Wordock has been successfully installed!"
